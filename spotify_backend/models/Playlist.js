@@ -25,6 +25,6 @@ const Playlist=mongoose.Schema({
        type:mongoose.Types.ObjectId,
        ref:"user"
    }]
-}); mongodb://localhost:27017
+}); mongodb://localhost:2701
 Playlist.plugin(plm);
 module.exports=mongoose.model("Playlist", Playlist) 
