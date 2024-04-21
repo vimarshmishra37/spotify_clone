@@ -19,6 +19,24 @@ router.get('/playlist', async (req, res, next) => {
 
 });
 */
+router.post('/login' ,async (req,res)=>{
+  console.log("hjvjer");
+  const {email,password}=req.body;
+  const User=await user.findOne({email:email});
+  if(!User)
+  {
+    return res.status(403).json({Error:"User does not exist"});
+  }
+  const isPasswordCorrect=await bcrypt.compare(password,User.password);
+  if(!isPasswordCorrect)
+  {
+    return res.status(403).json({Error:"Password is incorrect"});
+  }
+  const token=await getToken(email,User);
+  const userToken={...User.toJSON(),token};
+  delete userToReturn.password;
+  return res.status(200).json(userToken);
+})
 router.post("/register", async (req, res) => {
   // Ensure to provide a unique username
   const {email,password,firstname,lastname,username} = req.body;
@@ -33,7 +51,7 @@ router.post("/register", async (req, res) => {
  const newuser=await user.create(newuserdata);
 const token=await getToken(email,newuser);
   const userToken={...newuser.toJSON(),token};
-  delete userToReturn.password;
+  delete userToken.password;
   return res.status(200).json(userToken);
 });
 
