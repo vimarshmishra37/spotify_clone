@@ -38,7 +38,6 @@ router.post('/login' ,async (req,res)=>{
   const userToken={...User.toJSON(),token};
   delete userToReturn.password;
   return res.status(200).json(userToken);
-  return res.send(email);
 })
 router.post("/register", async (req, res) => {
   // Ensure to provide a unique username
@@ -60,3 +59,4 @@ const token=await getToken(email,newuser);
 });
 
 module.exports = router;
+
