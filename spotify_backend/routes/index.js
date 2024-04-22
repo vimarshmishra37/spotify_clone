@@ -21,8 +21,9 @@ router.get('/playlist', async (req, res, next) => {
 */
 router.post('/login' ,async (req,res)=>{
   console.log("hjvjer");
-  const {email,password}=req.body;
-  const User=await user.findOne({email:email});
+  const {email,password} = req.body;
+  console.log(req.body);
+ /* const User=await user.findOne({email:email});
   if(!User)
   {
     return res.status(403).json({Error:"User does not exist"});
@@ -35,7 +36,8 @@ router.post('/login' ,async (req,res)=>{
   const token=await getToken(email,User);
   const userToken={...User.toJSON(),token};
   delete userToReturn.password;
-  return res.status(200).json(userToken);
+  return res.status(200).json(userToken);*/
+  return res.send(email);
 })
 router.post("/register", async (req, res) => {
   // Ensure to provide a unique username
