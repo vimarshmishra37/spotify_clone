@@ -23,7 +23,8 @@ router.post('/login' ,async (req,res)=>{
   console.log("hjvjer");
   const {email,password} = req.body;
   console.log(req.body);
- /* const User=await user.findOne({email:email});
+  const User=await user.findOne({email:email});
+  console.log(User.password);
   if(!User)
   {
     return res.status(403).json({Error:"User does not exist"});
@@ -36,11 +37,12 @@ router.post('/login' ,async (req,res)=>{
   const token=await getToken(email,User);
   const userToken={...User.toJSON(),token};
   delete userToReturn.password;
-  return res.status(200).json(userToken);*/
+  return res.status(200).json(userToken);
   return res.send(email);
 })
 router.post("/register", async (req, res) => {
   // Ensure to provide a unique username
+  console.log(req.body);
   const {email,password,firstname,lastname,username} = req.body;
   const User = await user.findOne({email:email});
   if(User)
